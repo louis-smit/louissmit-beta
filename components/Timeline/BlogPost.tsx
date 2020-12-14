@@ -1,6 +1,6 @@
 import Link from 'next/link'
-import { ButtonSet, Notes, TimelineEntry } from './Entry'
-import { Edit2, Twitter } from 'react-feather'
+import { TimelineEntry } from './Entry'
+import { Edit2 } from 'react-feather'
 
 interface Props {
   slug: string
@@ -23,7 +23,7 @@ export const BlogPost = ({
     timestamp={timestamp}
     divider={divider}
   >
-    <Link passHref href={'/posts/' + slug}>
+    <Link passHref href={`/posts/${slug}`}>
       <a className="px-4 py-3 transition-shadow bg-white rounded-md shadow dark:bg-gray-900 hover:shadow-md">
         <div className="flex flex-col space-y-4">
           <div className="flex flex-col space-y-1">

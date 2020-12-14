@@ -25,6 +25,15 @@ interface HeaderProps {
 
 export const PageHeader = ({ title, subtitle }: HeaderProps) => {
   return (
+    <div className="flex flex-col space-y-4 md:items-center md:text-center">
+      <h1>{title}</h1>
+      {subtitle && <p className="text-2xl">{subtitle}</p>}
+    </div>
+  )
+}
+
+export const SplitPageHeader = ({ title, subtitle }: HeaderProps) => {
+  return (
     <div className="flex flex-col space-y-4 lg:items-start md:items-center sm:text-left md:text-center lg:text-left max-w-2xl lg:max-w-lg">
       <h1 className="lg:text-3xl">{title}</h1>
       {subtitle && (

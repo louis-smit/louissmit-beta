@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import {
@@ -17,7 +17,7 @@ interface Props {
 
 const NavLinks = ({ activeRoute }: Props) => {
   return (
-    <React.Fragment>
+    <>
       <Label isActive={activeRoute === 'Home'}>
         <Link href="/">
           <a>Home</a>
@@ -30,15 +30,15 @@ const NavLinks = ({ activeRoute }: Props) => {
         </Link>
       </Label>
 
-      <Label isActive={activeRoute === 'Projects'}>
-        <Link href="/about">
-          <a>Projects</a>
+      <Label isActive={activeRoute === 'Posts'}>
+        <Link href="/posts">
+          <a>Posts</a>
         </Link>
       </Label>
 
-      <Label isActive={activeRoute === 'Writing'}>
+      <Label isActive={activeRoute === 'Projects'}>
         <Link href="/projects">
-          <a>Posts</a>
+          <a>Projects</a>
         </Link>
       </Label>
 
@@ -53,12 +53,12 @@ const NavLinks = ({ activeRoute }: Props) => {
           <a>Security Checklist</a>
         </Link>
       </Label> */}
-    </React.Fragment>
+    </>
   )
 }
 
 const Header = () => {
-  const [isExpanded, setExpanded] = React.useState(false)
+  const [isExpanded, setExpanded] = useState(false)
   const router = useRouter()
 
   let activeRoute = ''
@@ -75,33 +75,18 @@ const Header = () => {
     activeRoute = 'Bookmarks'
     activePath = '/bookmarks'
   }
-  if (router.pathname.includes('/design-details')) {
-    activeRoute = 'App Dissection'
-    activePath = '/design-details'
-  }
-  if (router.pathname.includes('/overthought')) {
-    activeRoute = 'Writing'
-    activePath = '/overthought'
-  }
-  if (router.pathname.includes('/ama')) {
-    activeRoute = 'Ask Me Anything'
-    activePath = '/ama'
-  }
-  if (router.pathname.includes('/hn')) {
-    activeRoute = 'Hacker News'
-    activePath = '/hn'
-  }
-  if (router.pathname.includes('/security')) {
-    activeRoute = 'Security Checklist'
-    activePath = '/security'
+
+  if (router.pathname.includes('/posts')) {
+    activeRoute = 'Posts'
+    activePath = '/posts'
   }
 
   return (
-    <React.Fragment>
+    <>
       <MobileContainer expanded={isExpanded} data-cy="header">
         <Background className="bg-white bg-opacity-60 dark:bg-gray-900" />
         {isExpanded ? (
-          <React.Fragment>
+          <>
             <CloseButton
               className="p-3 text-primary"
               onClick={() => setExpanded(false)}
@@ -110,9 +95,9 @@ const Header = () => {
               ×
             </CloseButton>
             <NavLinks activeRoute={activeRoute} />
-          </React.Fragment>
+          </>
         ) : (
-          <React.Fragment>
+          <>
             <MenuButton
               className="text-primary"
               onClick={() => setExpanded(true)}
@@ -137,7 +122,7 @@ const Header = () => {
                 <span className="text-primary">{activeRoute}</span>
               </a>
             </Link>
-          </React.Fragment>
+          </>
         )}
       </MobileContainer>
 
@@ -147,7 +132,7 @@ const Header = () => {
         </InnerGrid>
         <Background className="bg-white bg-opacity-60 dark:bg-gray-900" />
       </Container>
-    </React.Fragment>
+    </>
   )
 }
 

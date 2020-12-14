@@ -1,17 +1,16 @@
 import { NextPage } from 'next'
 import Link from 'next/link'
-import Page, { PageHeader } from 'components/Page'
-import { CenteredColumn } from 'components/Layouts'
+import { SplitPageHeader } from 'components/Page'
 import { Timeline } from 'components/Timeline'
 import Header from 'components/Header'
-import { Footer } from 'components/Footer'
+import Footer from 'components/Footer'
 
 const Home: NextPage = () => {
   return (
     <HomePageContainer>
       <SplitScreen>
         <Main>
-          <PageHeader
+          <SplitPageHeader
             title="Hello, I’m Louis"
             subtitle="I’m a developer &amp; designer from Cape Town. I’m currently building web apps at Square Health."
           />
@@ -29,7 +28,9 @@ const Home: NextPage = () => {
               <Button>Follow me on Twitter</Button>
             </a>
           </div>
-          <Footer />
+          {/* <div className="pt-6">
+            <BlogSubscribeBox />
+          </div> */}
         </Main>
         <Scroll>
           <Timeline />
@@ -47,18 +48,21 @@ const Scroll = ({ children }) => (
 )
 
 const HomePageContainer = ({ children }) => (
-  <div className="flex flex-col px-4 lg:px-20">
+  <>
     <Header />
+    {children}
+    <Footer />
+  </>
+)
+
+const SplitScreen = ({ children }) => (
+  <div className="flex flex-col px-4 lg:px-20 max-w-screen-xl w-full mx-auto">
     {children}
   </div>
 )
 
-const SplitScreen = ({ children }) => (
-  <div className="flex flex-col max-w-screen-xl w-full mx-auto">{children}</div>
-)
-
 const Main = ({ children }) => (
-  <div className="flex lg:w-1/3 pt-32 flex-col space-y-8 lg:items-start md:items-center lg:fixed lg:float-left">
+  <div className="flex lg:w-1/2 pr-0 lg:pr-28 pt-32 flex-col space-y-8 lg:items-start md:items-center lg:fixed lg:float-left">
     {children}
   </div>
 )

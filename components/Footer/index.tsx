@@ -60,4 +60,6 @@ export const Footer = () => {
   )
 }
 
+export default Footer
+
 const Column = (props) => <div className="flex flex-col space-y-4" {...props} />
