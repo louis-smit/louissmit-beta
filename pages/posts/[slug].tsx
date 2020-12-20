@@ -1,7 +1,7 @@
 import Page from 'components/Page'
 import { PostContainer } from 'components/Blog'
 import ErrorPage from 'next/error'
-// import { useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 import { groq } from 'next-sanity'
 import { getClient, usePreviewSubscription, PortableText } from 'lib/sanity'
 
@@ -21,15 +21,22 @@ const postQuery = groq`
 `
 
 const PostPage = ({ data, preview }) => {
-  // const router = useRouter()
+  const router = useRouter()
+
+  if (router.isFallback) {
+    return <div>Loading...</div>
+  }
+
   // if (!router.isFallback && !data?.slug) {
-  if (!data.slug) {
+  if (!data?.post.slug) {
     return <ErrorPage statusCode={404} />
   }
 
-  const { data: post } = usePreviewSubscription(postQuery, {
+  const {
+    data: { post },
+  } = usePreviewSubscription(postQuery, {
     params: {
-      slug: data.slug,
+      slug: data.post.slug,
     },
     initialData: data,
     enabled: preview,
@@ -50,16 +57,13 @@ const PostPage = ({ data, preview }) => {
 }
 
 export const getStaticProps = async ({ params, preview = false }) => {
-  const data = await getClient(preview).fetch(postQuery, {
+  const post = await getClient(preview).fetch(postQuery, {
     slug: params.slug,
   })
 
-  return {
-    props: {
-      preview,
-      data,
-    },
-  }
+  if (!post) return { notFound: true }
+
+  return { props: { preview, data: { post } } }
 }
 
 export const getStaticPaths = async () => {
@@ -71,7 +75,7 @@ export const getStaticPaths = async () => {
     // Extract paths to Next's param objects
     paths: paths.map((slug) => ({ params: { slug } })),
     // Next fallback mode
-    fallback: false,
+    fallback: true,
   }
 }
 
