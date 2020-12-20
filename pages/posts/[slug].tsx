@@ -1,7 +1,7 @@
 import Page from 'components/Page'
 import { PostContainer } from 'components/Blog'
 import ErrorPage from 'next/error'
-import { useRouter } from 'next/router'
+// import { useRouter } from 'next/router'
 import { groq } from 'next-sanity'
 import { getClient, usePreviewSubscription, PortableText } from 'lib/sanity'
 
@@ -21,9 +21,9 @@ const postQuery = groq`
 `
 
 const PostPage = ({ data, preview }) => {
-  const router = useRouter()
-
-  if (!router.isFallback && !data?.slug) {
+  // const router = useRouter()
+  // if (!router.isFallback && !data?.slug) {
+  if (!data.slug) {
     return <ErrorPage statusCode={404} />
   }
 
@@ -50,15 +50,9 @@ const PostPage = ({ data, preview }) => {
 }
 
 export const getStaticProps = async ({ params, preview = false }) => {
-  console.log('ABOUT TO RUN GET STATIC PROPS FOR /posts/[slug]')
-
   const data = await getClient(preview).fetch(postQuery, {
     slug: params.slug,
   })
-
-  console.log('FETCHED DATA:')
-
-  console.log(data)
 
   return {
     props: {
@@ -69,20 +63,15 @@ export const getStaticProps = async ({ params, preview = false }) => {
 }
 
 export const getStaticPaths = async () => {
-  console.log('ABOUT TO RUN GET STATIC PATHS FOR /posts/[slug]')
   const paths = await getClient().fetch(
     groq`*[_type == "post" && defined(slug.current)][].slug.current`
   )
-
-  console.log('FETCHED PATHS:')
-
-  console.log(paths)
 
   return {
     // Extract paths to Next's param objects
     paths: paths.map((slug) => ({ params: { slug } })),
     // Next fallback mode
-    fallback: true,
+    fallback: false,
   }
 }
 

@@ -49,13 +49,7 @@ const PostsPage = ({ data, preview }) => {
 }
 
 export const getStaticProps = async ({ preview = false }) => {
-  console.log('ABOUT TO RUN GET STATIC PROPS FOR /posts')
-
   const data = await getClient(preview).fetch(postsQuery)
-
-  console.log('FETCHED DATA:')
-
-  console.log(data)
 
   return {
     props: {

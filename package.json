@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "concurrently \"next\" \"cd studio && sanity start\"",
     "build": "echo 'Building Sanity to public/studio…' && cd studio && sanity build ../public/studio -y && cd .. && next build",
-    "start": "vercel start",
+    "start": "next start",
     "postinstall": "lerna bootstrap",
     "lint": "eslint ./pages/* ./components/* ./api/* ./data/* ./graphql/* ./lib/* ./types/* -c .eslintrc.json --fix --ext ts,tsx",
     "lint:css": "stylelint './*.tsx'"
