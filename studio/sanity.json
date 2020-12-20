@@ -1,7 +1,8 @@
 {
   "root": true,
   "project": {
-    "name": "louissmit.me"
+    "name": "louissmit.me",
+    "basePath": "/studio"
   },
   "api": {
     "projectId": "olq46tda",
