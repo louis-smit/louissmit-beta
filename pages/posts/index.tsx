@@ -3,7 +3,7 @@ import { BlogSubscribeBox, PostList } from 'components/Blog'
 import { CenteredColumn } from 'components/Layouts'
 import { getClient, usePreviewSubscription } from 'lib/sanity'
 import { groq } from 'next-sanity'
-import { useRouter } from 'next/router'
+// import { useRouter } from 'next/router'
 
 const postsQuery = groq`
   *[_type == "post"]|order(publishedAt desc) {
@@ -21,12 +21,6 @@ const postsQuery = groq`
 `
 
 const PostsPage = ({ data, preview }) => {
-  const router = useRouter()
-
-  if (router.isFallback) {
-    return <p>Loading</p>
-  }
-
   const { data: posts } = usePreviewSubscription(postsQuery, {
     initialData: data,
     enabled: preview,
