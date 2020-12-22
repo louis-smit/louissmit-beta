@@ -21,7 +21,7 @@ export const PostContainer = ({ title, updatedAt, children }) => {
             />
           )} */}
           <div className="flex flex-col space-y-3">
-            <h1>{title}</h1>
+            <h1 className="font-fira">{title}</h1>
             <p className="p-small">
               Updated {formatDistance(new Date(updatedAt), new Date())} ago
             </p>

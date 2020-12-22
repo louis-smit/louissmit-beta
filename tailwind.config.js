@@ -55,6 +55,9 @@ module.exports = {
       colors: {
         'gray-1000': '#050505',
       },
+      fontFamily: {
+        fira: ['Fira Sans', 'ui-sans-serif'],
+      },
     },
   },
   variants: {
