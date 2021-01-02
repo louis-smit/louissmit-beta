@@ -12,7 +12,7 @@ export const PostContainer = ({ title, updatedAt, children }) => {
       {/* SEO */}
 
       <CenteredColumn>
-        <div>
+        <div className="">
           {/* {post.feature_image && (
             <FeaturedImage
               alt={post.title}
@@ -20,11 +20,17 @@ export const PostContainer = ({ title, updatedAt, children }) => {
               src={post.feature_image}
             />
           )} */}
-          <div className="flex flex-col space-y-3">
+          <div className="flex flex-col space-y-3 text-center align-middle">
             <h1 className="font-fira">{title}</h1>
-            <p className="p-small">
+            {/* <p className="p-small">
               Updated {formatDistance(new Date(updatedAt), new Date())} ago
-            </p>
+            </p> */}
+            <div className="flex space-x-2 font-semibold text-xs uppercase text-gray-800 italic mx-auto">
+              <span>April 8, 2020 / </span>
+              <span>
+                Updated {formatDistance(new Date(updatedAt), new Date())} ago
+              </span>
+            </div>
           </div>
         </div>
 

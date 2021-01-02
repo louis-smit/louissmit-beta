@@ -57,6 +57,8 @@ module.exports = {
       },
       fontFamily: {
         fira: ['Fira Sans', 'ui-sans-serif'],
+        // source: ['Source Serif Pro', 'ui-serif'],
+        // bitter: ['Bitter', 'ui-sans-serif'],
       },
     },
   },
